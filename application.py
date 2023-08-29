@@ -79,13 +79,28 @@ def main():
                     cur.execute(command)
                     try:
                         result = cur.fetchall()
+                        column_names = [desc[0] for desc in cur.description]
+                        result_counter = 0
                         for instance in result:
-                            print(instance)
+                            variating = 0
+                            print(colours["green"]+"Result no. "+str(result_counter))
+                            result_counter += 1
+                            for key, value in zip(column_names, instance):
+                                # Alternates the colours to make it easier to read 
+                                if variating == 1:
+                                    colour = colours["black"]
+                                    variating = 0
+                                else:
+                                    colour = colours["white"]
+                                    variating = 1
+                                
+                                print(colour+key + ": " + value)
+                            print()  # Add an empty line between instances
                     except:
                         pass
                     conn.commit()
                     command = ""
-                    print(colours["green"] + "Executed!" + colours["reset"])
+                    print(colours["green"] + "Executed!\n" + colours["reset"])
                     continue
 
                 # Continues to take in lines from the user until they type "RUN", adds them to the command variable.
