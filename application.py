@@ -94,7 +94,7 @@ def main():
                                     colour = colours["white"]
                                     variating = 1
                                 
-                                print(colour+key + ": " + value)
+                                print(colour+str(key) + ": " + str(value))
                             print()  # Add an empty line between instances
                     except:
                         pass
